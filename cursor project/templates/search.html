@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanospace Search Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .molecule-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+            margin-top: 32px;
+            margin-bottom: 32px;
+        }
+        .molecule-img {
+            width: 320px;
+            height: 320px;
+            object-fit: contain;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            background: #fafbfc;
+        }
+        .molecule-main-info {
+            flex: 1;
+        }
+        .molecule-title {
+            font-size: 2.7rem;
+            font-weight: bold;
+            color: #05406c;
+            margin-bottom: 18px;
+        }
+        .molecule-props {
+            font-size: 1.15rem;
+            margin-bottom: 18px;
+        }
+        .molecule-props span {
+            display: inline-block;
+            min-width: 180px;
+            font-weight: 600;
+        }
+        .molecule-buttons {
+            margin-bottom: 18px;
+        }
+        .molecule-buttons button {
+            background: #05406c;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 22px;
+            font-size: 1rem;
+            margin-right: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .molecule-buttons button:hover {
+            background: #00294d;
+        }
+        .tab-content {
+            background: #fff;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            padding: 24px;
+            margin-top: -2px;
+        }
+        .tab-pane h5 {
+            margin-top: 18px;
+        }
+        .badge {
+            font-size: 1rem;
+        }
+        .nav-tabs .dropdown-menu {
+            border-radius: 0 0 8px 8px;
+            min-width: 200px;
+        }
+        .nav-tabs .dropdown-item {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">Nanospace</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Nanospace Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Participation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="aboutModalLabel">About</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" style="max-height:70vh; overflow-y:auto;">
+            <p><b>About</b><br>
+            The envisaged nanocarbon inventory database is conceived as a vast, dynamic repository that shall be a scientific heritage and an invaluable resource to the global scientific community. Its primary aim is to compile and multiplexed data on carbon nanomaterials in space. Some of the highlights include:</p>
+            <ul>
+              <li>A multidimensional dataset—from molecular properties and high-resolution spectroscopic signatures to reaction pathways and nano-carbon formation—derived from observational astronomy, laboratory experiments, and theoretical calculations.</li>
+              <li>The integration of interdisciplinary research outcomes that will allow researchers to rapidly screen, identify, and model the numerous nano-carbon species. This will be essential in comprehending their roles in astrophysical processes and astrochemistry.</li>
+              <li>A tool not only for facilitating present research but also for facilitating future research by providing access to new tools for data mining, predictive modeling, and the development of new experimental techniques.</li>
+              <li>An international and cross-disciplinary networking forum with the final goal to assist in educating a new generation of researchers possessing translational skills that are valuable for both academic and industrial pursuit.</li>
+            </ul>
+            <p>Essentially, the database will integrate multiple types of data—like high-resolution spectroscopic signatures, molecular geometries, optical constants, reaction rates, and thermochemical properties—collected from astronomical observations, laboratory experiments, and advanced theoretical simulations. This integrated platform will allow for rapid screening, predictive modeling, and efficient data mining of carbon-based nanostructures. It aims to facilitate the identification of key nano-carbon species (such as fullerenes, polycyclic aromatic hydrocarbons, and other carbonaceous molecules) and increase our understanding of their formation processes, reactivity, and astrochemical impact in extraterrestrial environments.</p>
+            <p>The MoU addresses the strategic value of creating an interdisciplinary and user-friendly database, one that provides a common vocabulary and structure for scientists from observation astronomy, laboratory astrophysics, theoretical chemistry, and materials science. Along the same lines, the database will not only be storing spectral and molecular data but also as an interactive place to consolidate experimental facts and theoretical concepts. Researchers would be assisted with a highly capable search interface for dealing with elaborate queries, API, visualisation tools, and connectivity to other resources outside the database so that data from diverse sources—be it radioastronomical observations or DFT and molecular dynamics calculations—are readily accessible.</p>
+            <p>The developmental timeframe is politely segmented into phases, beginning with the closure of scientific data properties and technical database design (Stage 0), followed by coding, beta release with community feedback, and subsequent iterated debugging and expansion phases. This incremental approach—ranging from hackathons, version releases (v0.x, v1.x, etc.), to routine community engagement—assures that the database remains up-to-date and adjusts to user needs and advancing research developments.</p>
+            <p>Feedback from the scientific community has highlighted several vital requirements, including:</p>
+            <ul>
+              <li>Application of comprehensive metadata and standardized data types to avoid gaps and inconsistencies.</li>
+              <li>An integrated platform bringing together astronomical and laboratory spectra such that observational and simulated data are interchangeable.</li>
+              <li>Accessible interfaces and stable APIs to overcome some of the challenges present today like unreliable platforms, old content, and restricted wavelength range.</li>
+              <li>Inclusion of state-of-the-art features like literature datamining, complete cross-sectional data for dust particles, and quantum chemistry method benchmarking tools.</li>
+            </ul>
+            <p>Furthermore, the database will be an open-source, community-hosted platform, and it will be builded on C++, Python, PostgreSQL. Contributing contributors will be invited to contribute through established channels (e.g., GitHub and specifically reserved Slack communities). This process will not only guarantee transparency and reproducibility in astrochemistry but also offer a stable, long-term source that benefits later generations of scientists across various disciplines.</p>
+            <p>Briefly, the new nanocarbon database is a significant development in our capacity to systematically understand and apply the complexity of cosmic carbon nanostructures. By incorporating cutting-edge scientific data with firm technical design and an open, participatory platform, the database will facilitate future astrochemical discoveries, drive technological breakthroughs, and assist in broader socioeconomic progress.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+        <div class="molecule-header">
+            <img src="/static/img.png" alt="Buckminsterfullerene" class="molecule-img">
+            <div class="molecule-main-info">
+                <div class="molecule-title">Buckminsterfullerene</div>
+                <div class="molecule-props">
+                    <div><span>Molecular formula:</span> C<sub>60</sub></div>
+                    <div><span>Average mass:</span> 720.660</div>
+                    <div><span>Monoisotopic mass:</span> 720.000000</div>
+                    <div><span>Nanospace ID:</span> 110185</div>
+                </div>
+                <div class="molecule-buttons">
+                    <button>Download .mol</button>
+                    <button>Cite this record</button>
+                </div>
+            </div>
+        </div>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="names-tab" data-bs-toggle="tab" data-bs-target="#names" type="button" role="tab">Names</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="properties-tab" data-bs-toggle="tab" data-bs-target="#properties" type="button" role="tab">Properties</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="spectra-tab" data-bs-toggle="tab" data-bs-target="#spectra" type="button" role="tab">Spectra</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="vendors-tab" data-bs-toggle="tab" data-bs-target="#vendors" type="button" role="tab">Vendors</button>
+            </li>
+            <li class="nav-item dropdown" role="presentation">
+                <button class="nav-link dropdown-toggle" id="moreDropdown" data-bs-toggle="dropdown" type="button" role="tab" aria-expanded="false">More</button>
+                <ul class="dropdown-menu" aria-labelledby="moreDropdown">
+                    <li><a class="dropdown-item" href="#">Articles</a></li>
+                    <li><a class="dropdown-item" href="#">Searches</a></li>
+                    <li><a class="dropdown-item" href="#">Data sources</a></li>
+                    <li><a class="dropdown-item" href="#">Crystal CIFs</a></li>
+                    <li><a class="dropdown-item" href="#">Wikipedia</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="names" role="tabpanel">
+                <h5>Names and synonyms</h5>
+                <hr>
+                <b>Verified</b>
+                <ul>
+                    <li>(5,6)Fullerene-C60-Ih</li>
+                    <li>(C60-Ih)[5,6]Fullerene</li>
+                    <li>131159-39-2 [RN]</li>
+                    <li>99685-96-8 [RN]</li>
+                    <li>[60]fullerene</li>
+                    <li>Buckminsterfullereen [Dutch]</li>
+                    <li>Buckminsterfulleren [Danish]</li>
+                    <li>Buckminsterfulleren [Polish]</li>
+                    <li>Buckminsterfulleren [Swedish]</li>
+                    <li>Buckminsterfullerene [Wiki]</li>
+                    <li>Buckminsterfullerene [Indonesian]</li>
+                    <li>Buckminsterfullerene [Italian]</li>
+                    <li>Buckminsterfullerène [French]</li>
+                    <li>Buckminsterfullerene, C60</li>
+                    <li>Buckminsterfullerener [Norwegian]</li>
+                    <li>Buckminsterfullereno [Spanish]</li>
+                    <li>Bukminsterfuleren [Croatian]</li>
+                    <li>C60 fullerene</li>
+                    <li>Fullerene C60</li>
+                    <li>fullerene-c60</li>
+                    <li>Millíní Bucky [Irish]</li>
+                    <li>soccerballene</li>
+                    <li>Бакминстерфулерен [Macedonian]</li>
+                    <li>Бъкминстърфулерен [Bulgarian]</li>
+                    <li>فولرن باکمینستر [Persian]</li>
+                    <li>버크민스터풀러렌 [Korean]</li>
+                    <li>バックミンスターフラーレン [Japanese]</li>
+                </ul>
+                <b>Unverified</b>
+                <ul>
+                    <li>(C_{60}-I_{h})[5,6]fullerene</li>
+                    <li>(Contains 20% C70 and 1% higher fullerenes)</li>
+                    <li>308068-56-6 [RN]</li>
+                    <li>5901022 [Beilstein]</li>
+                    <li>60C</li>
+                    <li>99.5% C60</li>
+                    <li>[5,6]fullerene-C60-Ih</li>
+                    <li>[60-Ih]fullerene</li>
+                    <li>buckminsterfulereno</li>
+                    <li>Buckminsterfulleren</li>
+                    <li>buckminsterfullerene c60</li>
+                    <li>Buckyball [Wiki]</li>
+                    <li>footballene</li>
+                    <li>Fullerene</li>
+                    <li>Fullerene - C60</li>
+                    <li>Fullerene carbon soot (contains 5-8wt% C60/C70 and higher fullerenes)</li>
+                    <li>Fullerene-C<sub>60</sub></li>
+                    <li>MFCD00151408 [MDL number]</li>
+                    <li>富勒烯 [Chinese][Wiki]</li>
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="properties" role="tabpanel">
+                <h5>Physical Properties</h5>
+                <hr>
+                <p>Boiling point: <i>No data</i></p>
+                <h5>Predicted</h5>
+                <hr>
+                <p>ACD/Labs: <i>No data</i></p>
+            </div>
+            <div class="tab-pane fade" id="spectra" role="tabpanel">
+                <h5>No Spectra found</h5>
+                <p>ChemSpider does not currently have any Spectra data for this record.</p>
+            </div>
+            <div class="tab-pane fade" id="vendors" role="tabpanel">
+                <h5>Vendors</h5>
+                <hr>
+                <p>Please be aware the links below go to external websites that are not part of the RSC.</p>
+                <ul>
+                    <li>abcr: <a href="#">AB109139</a></li>
+                    <li>Acros Organics: <a href="#">AC295010010</a></li>
+                    <li>AK Scientific: <a href="#">X4482</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

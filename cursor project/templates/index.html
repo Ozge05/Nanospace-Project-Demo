@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanospace Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .center-vertical {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="/" style="margin-right:0;">
+                <img src="/static/nanospace_logo.png" alt="NanoSpace Logo" height="48" class="me-2" style="max-height:48px;">
+                <span style="font-size:2rem; font-weight:600; color:#222;">Nanospace</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Nanospace Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Participation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <div class="container center-vertical">
+        <div class="row justify-content-center w-100">
+            <div class="col-md-8">
+                <div class="search-container">
+                    <h2 class="mb-4 text-center" style="font-size:2rem; font-weight:600; color:#05406c;">Nanospace Search</h2>
+                    <form action="{{ url_for('search') }}" method="get">
+                        <div class="input-group mb-3 align-items-center">
+                            <input type="text" class="form-control form-control-lg" 
+                                   placeholder="Search by molecule, formula or name..." 
+                                   name="q">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

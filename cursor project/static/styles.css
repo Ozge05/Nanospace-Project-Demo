@@ -1,0 +1,47 @@
+/* Genel Stiller */
+body {
+    background-color: #f8f9fa;
+}
+
+/* Navbar Stilleri */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+/* Arama Kutusu Stilleri */
+.search-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+/* Arama Sonuçları Stilleri */
+.search-results {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+/* Filtre Kartı Stilleri */
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    border: none;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+/* Liste Öğeleri Stilleri */
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    transition: background-color 0.2s;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+} 
